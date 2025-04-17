@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Объяснение</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Ваш ответ:
+            <span class="{{ 'correct' if question.is_correct else 'incorrect' }}">
+                {{ 'Правильно!' if question.is_correct else 'Неправильно' }}
+            </span>
+        </h2>
+
+        <div class="question">
+            <h3>{{ question.text }}</h3>
+            <p><strong>Правильный ответ:</strong>
+               {{ ['A', 'B', 'C', 'D'][question.correct-1] }}</p>
+
+            <div class="explanation">
+                <h4>Подробное объяснение:</h4>
+                <p>{{ question.explanation }}</p>
+
+                {% if question.example %}
+                <div class="example">
+                    <h4>Пример:</h4>
+                    <pre><code>{{ question.example }}</code></pre>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="navigation">
+            <p>Вопрос {{ question_num }} из {{ total_questions }}</p>
+            <a href="{{ url_for('next_question') }}" class="button">
+                {{ 'Следующий вопрос' if question_num < total_questions else 'Завершить' }}
+            </a>
+        </div>
+    </div>
+</body>
+</html>

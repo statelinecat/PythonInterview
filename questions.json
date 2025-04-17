@@ -1,0 +1,134 @@
+[
+  {
+    "text": "Что такое Middleware, для чего, как реализуется?",
+    "options": [
+      "Декораторы для views-функций",
+      "Промежуточные слои обработки запроса/ответа",
+      "Инструменты для работы с БД",
+      "Шаблоны для админ-панели"
+    ],
+    "correct": 1,
+    "explanation": "Middleware - это компоненты, которые обрабатывают запросы и ответы на глобальном уровне до/после view. Реализуются как классы с методами process_request и process_response.",
+    "example": "class SimpleMiddleware:\n    def __init__(self, get_response):\n        self.get_response = get_response\n\n    def __call__(self, request):\n        # Код до view\n        response = self.get_response(request)\n        # Код после view\n        return response"
+  },
+  {
+    "text": "Назовите основные мидлвари. Зачем они нужны?",
+    "options": [
+      "Session, CSRF, Auth - для базовой функциональности",
+      "Только для кэширования",
+      "Для генерации HTML",
+      "Для работы с Celery"
+    ],
+    "correct": 0,
+    "explanation": "Основные встроенные middleware Django: Security, Session, CSRF, Auth, Common. Обеспечивают безопасность, аутентификацию, сессии и другую базовую функциональность.",
+    "example": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n]"
+  },
+  {
+    "text": "Опишите алгоритм работы CSRF middleware",
+    "options": [
+      "Генерация токена -> Проверка для POST -> Отказ при несоответствии",
+      "Шифрование всех данных формы",
+      "Блокировка всех POST-запросов",
+      "Автоматическая проверка без токена"
+    ],
+    "correct": 0,
+    "explanation": "1) Генерирует уникальный токен для сессии 2) Добавляет в формы как скрытое поле 3) Для POST-запросов проверяет совпадение токена 4) Блокирует запрос при несоответствии.",
+    "example": "<!-- В форме -->\n<input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"токен\">\n\n# В middleware:\nif request.method == 'POST':\n    if not valid_token(request):\n        return HttpResponseForbidden()"
+  },
+  {
+    "text": "Что такое сигналы? Зачем нужны?",
+    "options": [
+      "HTTP-запросы к внешним API",
+      "Система уведомлений о событиях в приложении",
+      "Сигналы ОС для процессов",
+      "WebSocket соединения"
+    ],
+    "correct": 1,
+    "explanation": "Сигналы позволяют выполнять код при возникновении событий (сохранение модели, запрос/ответ). Реализуют слабую связность через механизм publisher-subscriber.",
+    "example": "from django.db.models.signals import pre_save\nfrom django.dispatch import receiver\n\n@receiver(pre_save, sender=MyModel)\ndef handler(sender, instance, **kwargs):\n    print(f\"Сохранение {instance}\")"
+  },
+  {
+    "text": "Как реализуется связь m2m на уровне базы данных?",
+    "options": [
+      "Через дополнительную таблицу связей",
+      "Путем дублирования данных",
+      "Через JSON-поле",
+      "Специальным типом столбца"
+    ],
+    "correct": 0,
+    "explanation": "Связь многие-ко-многим реализуется через промежуточную таблицу с двумя внешними ключами, ссылающимися на связываемые таблицы. Django создает ее автоматически.",
+    "example": "# Таблица `books`\n# Таблица `authors`\n# Таблица `books_authors` (author_id, book_id)"
+  },
+  {
+    "text": "Чем лучше отправлять форму — GET или POST?",
+    "options": [
+      "GET - для получения данных, POST - для изменения",
+      "POST для всего",
+      "GET для всего",
+      "Не имеет значения"
+    ],
+    "correct": 0,
+    "explanation": "GET - для безопасных операций (поиск, фильтрация), данные в URL. POST - для изменения данных (логины, платежи), данные в теле запроса. Соответствует REST-практикам.",
+    "example": "GET /search?q=django  # Безопасный запрос\nPOST /login  # Отправка учетных данных"
+  },
+  {
+    "text": "Как работает Serializer в Django REST Framework?",
+    "options": [
+      "Преобразует Python-объекты <-> JSON/XML",
+      "Только для валидации",
+      "Только для генерации JSON",
+      "Для работы с шаблонами"
+    ],
+    "correct": 0,
+    "explanation": "Сериализаторы DRF преобразуют сложные типы (QuerySet, модели) в Python-примитивы, которые затем могут быть преобразованы в JSON/XML, и обратно. Также валидируют данные.",
+    "example": "class UserSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = User\n        fields = ['id', 'username']\n\n# Использование:\nserializer = UserSerializer(user)\njson = serializer.data"
+  },
+  {
+    "text": "Что такое Meta в классах Django и для чего нужен?",
+    "options": [
+      "Класс для хранения метаданных о модели/форме/сериализаторе",
+      "Системная переменная",
+      "Декоратор методов",
+      "Родительский класс"
+    ],
+    "correct": 0,
+    "explanation": "Вложенный класс Meta содержит метаданные: для моделей - параметры БД, для форм - поля и валидаторы, для сериализаторов - поля и модель.",
+    "example": "class MyModel(models.Model):\n    name = models.CharField()\n    \n    class Meta:\n        verbose_name = 'Модель'\n        ordering = ['name']"
+  },
+  {
+    "text": "За что отвечает Meta в сериализаторе?",
+    "options": [
+      "Определяет модель и поля для сериализации",
+      "Настройки производительности",
+      "Параметры HTTP-заголовков",
+      "Внешний вид API"
+    ],
+    "correct": 0,
+    "explanation": "Meta в сериализаторе определяет: model - связанную модель, fields - поля для сериализации, extra_kwargs - дополнительные параметры полей, validators.",
+    "example": "class UserSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = User\n        fields = ['id', 'username', 'email']\n        extra_kwargs = {'password': {'write_only': True}}"
+  },
+  {
+    "text": "Какая разница в быстродействии между Django и Flask (и почему)?",
+    "options": [
+      "Flask быстрее, т.к. минималистичен",
+      "Django быстрее за счет оптимизаций",
+      "Нет различий",
+      "Зависит от версии Python"
+    ],
+    "correct": 0,
+    "explanation": "Flask обычно быстрее в простых сценариях из-за минимальной накладной нагрузки. Django медленнее из-за ORM, middleware и других встроенных компонентов, но разница незначительна для большинства приложений.",
+    "example": "Тест 'Hello World':\nFlask: ~10k rps\nDjango: ~5k rps\n\nПри использовании БД разница сокращается"
+  },
+  {
+    "text": "Как в Django работает система аутентификации?",
+    "options": [
+      "Через middleware и модель User",
+      "Только через сторонние сервисы",
+      "Через cookies без БД",
+      "Требует ручной реализации"
+    ],
+    "correct": 0,
+    "explanation": "Django использует: 1) AuthenticationMiddleware для привязки пользователя к запросу 2) Модель User для хранения данных 3) Сессии для отслеживания входа 4) Декораторы (@login_required) и миксины для контроля доступа.",
+    "example": "# login_view:\nuser = authenticate(request, username=u, password=p)\nif user:\n    login(request, user)\n\n# В шаблоне:\n{% if user.is_authenticated %}\n  Привет, {{ user.username }}!\n{% endif %}"
+  }
+]

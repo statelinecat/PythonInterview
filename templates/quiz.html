@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вопрос {{ question_num }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Вопрос {{ question_num }} из {{ total_questions }}</h2>
+        <p>{{ question.text }}</p>
+
+        <form action="{{ url_for('submit_answer') }}" method="post">
+            <div class="options">
+                <label>
+                    <input type="radio" name="option" value="1" required>
+                    {{ question.option1 }}
+                </label>
+                <label>
+                    <input type="radio" name="option" value="2">
+                    {{ question.option2 }}
+                </label>
+                <label>
+                    <input type="radio" name="option" value="3">
+                    {{ question.option3 }}
+                </label>
+                <label>
+                    <input type="radio" name="option" value="4">
+                    {{ question.option4 }}
+                </label>
+            </div>
+            <button type="submit">Ответить</button>
+        </form>
+    </div>
+</body>
+</html>

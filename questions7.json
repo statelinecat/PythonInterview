@@ -1,0 +1,122 @@
+[
+  {
+    "text": "Чем отличается статический и динамический контент на сайте?",
+    "options": [
+      "Статический генерируется сервером, динамический - заранее подготовлен",
+      "Динамический генерируется сервером при каждом запросе, статический - неизменяемые файлы",
+      "Нет различий в современных сайтах",
+      "Статический работает только с JavaScript"
+    ],
+    "correct": 1,
+    "explanation": "Статический контент (HTML, CSS, изображения) - заранее созданные файлы. Динамический контент генерируется сервером при запросе (например, персональные рекомендации).",
+    "example": "Статический: about.html\nДинамический: /user/profile (генерируется для каждого пользователя)"
+  },
+  {
+    "text": "Как использовать Selenium для автоматизации браузера в Python?",
+    "options": [
+      "Только для парсинга статических страниц",
+      "Через WebDriver для управления реальным браузером",
+      "Как альтернатива requests для API",
+      "Только для мобильных приложений"
+    ],
+    "correct": 1,
+    "explanation": "Selenium WebDriver позволяет управлять браузером: открывать страницы, кликать элементы, заполнять формы. Требуется драйвер конкретного браузера (ChromeDriver и др.).",
+    "example": "from selenium import webdriver\ndriver = webdriver.Chrome()\ndriver.get('https://example.com')\nelement = driver.find_element_by_id('search')\ndriver.quit()"
+  },
+  {
+    "text": "Что такое фреймворк Flask, и как создать приложение на Flask?",
+    "options": [
+      "ORM система для Python",
+      "Микрофреймворк для веб-приложений с минимальными настройками",
+      "Библиотека для мобильной разработки",
+      "Инструмент для анализа данных"
+    ],
+    "correct": 1,
+    "explanation": "Flask - микрофреймворк для веб-приложений. Базовое приложение создается за несколько строк кода с использованием декораторов для маршрутов.",
+    "example": "from flask import Flask\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n    return 'Hello World!'\n\nif __name__ == '__main__':\n    app.run()"
+  },
+  {
+    "text": "Чем отличаются GET и POST запросы в веб-разработке?",
+    "options": [
+      "GET для получения данных, POST для отправки",
+      "POST кэшируется браузером, GET - нет",
+      "Нет существенных различий",
+      "GET безопаснее для конфиденциальных данных"
+    ],
+    "correct": 0,
+    "explanation": "GET - получение данных (параметры в URL), POST - отправка данных (тело запроса). GET имеет ограничения по длине, POST - нет. GET можно кэшировать и сохранять в закладки.",
+    "example": "GET: /search?q=python\nPOST: Форма входа (логин/пароль)"
+  },
+  {
+    "text": "Как настроить маршруты и обработчики в Flask?",
+    "options": [
+      "Через XML-конфигурации",
+      "Используя декоратор @app.route()",
+      "Только через административную панель",
+      "Через файл .htaccess"
+    ],
+    "correct": 1,
+    "explanation": "Маршруты в Flask настраиваются через декоратор @app.route(), который связывает URL с функцией-обработчиком. Можно указывать методы HTTP и переменные в URL.",
+    "example": "@app.route('/user/<username>')\ndef show_user(username):\n    return f'User {username}'"
+  },
+  {
+    "text": "Что такое шаблонизатор в Flask, и как работать с HTML-шаблонами?",
+    "options": [
+      "Инструмент для создания БД",
+      "Jinja2 для генерации HTML с динамическими данными",
+      "Только для статических страниц",
+      "Альтернатива CSS"
+    ],
+    "correct": 1,
+    "explanation": "Flask использует Jinja2 для шаблонов. Позволяет вставлять переменные {{ name }}, использовать условия {% if %}, циклы {% for %} и наследование шаблонов {% extends %}.",
+    "example": "<!-- template.html -->\n<h1>Hello {{ name }}!</h1>\n\n# В коде:\nreturn render_template('template.html', name='Alice')"
+  },
+  {
+    "text": "Как использовать фреймворк Django для создания простого веб-приложения?",
+    "options": [
+      "Только как ORM без веб-интерфейса",
+      "Через создание проекта, приложения, моделей и представлений",
+      "Только для REST API",
+      "Как альтернатива Flask без различий"
+    ],
+    "correct": 1,
+    "explanation": "Django требует больше настройки чем Flask: startproject, startapp, определение моделей, представлений, URL-маршрутов. Включает админ-панель из коробки.",
+    "example": "django-admin startproject mysite\npython manage.py startapp blog\n# Определение моделей в models.py\n# Создание представлений в views.py"
+  },
+  {
+    "text": "Что такое ORM (Object-Relational Mapping) и как его использовать в Django?",
+    "options": [
+      "Способ хранить объекты в файлах",
+      "Технология преобразования объектов Python в записи БД и обратно",
+      "Язык запросов для HTML",
+      "Инструмент для работы с API"
+    ],
+    "correct": 1,
+    "explanation": "ORM Django позволяет работать с БД как с Python-объектами. Модели наследуются от django.db.models.Model, автоматически создают таблицы и предоставляют API для запросов.",
+    "example": "from django.db import models\n\nclass Post(models.Model):\n    title = models.CharField(max_length=100)\n    content = models.TextField()\n\n# Использование:\nPost.objects.all()\nPost.objects.filter(title__contains='Django')"
+  },
+  {
+    "text": "Как в Django работать с моделями и миграциями?",
+    "options": [
+      "Ручное редактирование БД",
+      "Через manage.py: makemigrations и migrate",
+      "Только через raw SQL",
+      "Автоматически без контроля версий"
+    ],
+    "correct": 1,
+    "explanation": "После изменения моделей: makemigrations создает файл миграции, migrate применяет изменения к БД. Миграции позволяют отслеживать и откатывать изменения схемы БД.",
+    "example": "python manage.py makemigrations\npython manage.py migrate\n# Отмена последней миграции:\npython manage.py migrate app_name previous_migration"
+  },
+  {
+    "text": "Что такое Git, и как начать использовать систему контроля версий?",
+    "options": [
+      "Язык программирования",
+      "Система контроля версий для отслеживания изменений в коде",
+      "База данных для веб-приложений",
+      "Фреймворк для тестирования"
+    ],
+    "correct": 1,
+    "explanation": "Git - распределенная система контроля версий. Базовый workflow: init/clone, add, commit, push/pull. Позволяет работать с ветками, откатывать изменения и сотрудничать.",
+    "example": "git init\ngit add .\ngit commit -m 'Initial commit'\ngit remote add origin url\ngit push -u origin master"
+  }
+]

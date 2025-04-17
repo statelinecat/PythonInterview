@@ -1,0 +1,122 @@
+[
+  {
+    "text": "Как выполнить SQL-запрос с использованием Python?",
+    "options": [
+      "Через метод execute() курсора",
+      "Непосредственно через соединение",
+      "Только через ORM",
+      "Через специальный метод query()"
+    ],
+    "correct": 0,
+    "explanation": "SQL-запросы выполняются через метод execute() объекта курсора. После выполнения нужно подтвердить изменения commit() для INSERT/UPDATE/DELETE.",
+    "example": "import sqlite3\nconn = sqlite3.connect('example.db')\ncursor = conn.cursor()\ncursor.execute('SELECT * FROM users')\nrows = cursor.fetchall()"
+  },
+  {
+    "text": "Как выполнить сортировку данных в SQL-запросе?",
+    "options": [
+      "Через оператор SORT",
+      "Используя ORDER BY",
+      "С помощью метода sort()",
+      "Через оператор ARRANGE"
+    ],
+    "correct": 1,
+    "explanation": "Сортировка выполняется с помощью ORDER BY в SQL-запросе. Можно сортировать по одному или нескольким столбцам (ASC - по возрастанию, DESC - по убыванию).",
+    "example": "SELECT * FROM products ORDER BY price DESC;\nSELECT name, age FROM users ORDER BY age ASC, name DESC;"
+  },
+  {
+    "text": "Чем отличается JOIN от INNER JOIN в SQL?",
+    "options": [
+      "Это синонимы",
+      "JOIN работает быстрее",
+      "INNER JOIN только для внутренних таблиц",
+      "JOIN не поддерживает условия"
+    ],
+    "correct": 0,
+    "explanation": "JOIN и INNER JOIN - это одно и то же. Оба оператора возвращают строки, где есть соответствие в обеих таблицах. Есть также LEFT JOIN, RIGHT JOIN, FULL JOIN.",
+    "example": "SELECT users.name, orders.amount\nFROM users\nINNER JOIN orders ON users.id = orders.user_id"
+  },
+  {
+    "text": "Как обновить данные в таблице SQL через Python?",
+    "options": [
+      "Через метод update()",
+      "Используя запрос UPDATE в execute()",
+      "Только через ORM",
+      "Через специальный метод modify()"
+    ],
+    "correct": 1,
+    "explanation": "Для обновления данных используется SQL-запрос UPDATE, выполняемый через execute(). Важно не забывать подтверждать изменения commit().",
+    "example": "cursor.execute(\"UPDATE users SET email = ? WHERE id = ?\", ('new@email.com', 1))\nconn.commit()"
+  },
+  {
+    "text": "Что такое REST API, и как Python может взаимодействовать с API?",
+    "options": [
+      "Стандарт для баз данных",
+      "Архитектурный стиль для веб-сервисов, взаимодействие через HTTP-запросы",
+      "Протокол для работы с файлами",
+      "Специальный язык запросов"
+    ],
+    "correct": 1,
+    "explanation": "REST API - архитектурный стиль для веб-сервисов, использующий HTTP-методы (GET, POST и др.). Python может взаимодействовать через библиотеки requests, urllib и др.",
+    "example": "import requests\nresponse = requests.get('https://api.example.com/data')"
+  },
+  {
+    "text": "Как работать с библиотекой requests в Python?",
+    "options": [
+      "Только для GET-запросов",
+      "Через методы get(), post(), put(), delete()",
+      "Только через низкоуровневые сокеты",
+      "Через специальный интерпретатор"
+    ],
+    "correct": 1,
+    "explanation": "Библиотека requests предоставляет методы для всех типов HTTP-запросов: get(), post(), put(), delete() и др. Возвращает объект Response с данными ответа.",
+    "example": "import requests\nr = requests.get('https://api.example.com')\ndata = r.json()"
+  },
+  {
+    "text": "Как отправить POST-запрос с помощью библиотеки requests?",
+    "options": [
+      "Через метод send_post()",
+      "Используя requests.post()",
+      "Только через curl",
+      "Через специальный класс PostRequest"
+    ],
+    "correct": 1,
+    "explanation": "POST-запрос отправляется через requests.post(). Данные можно передавать в параметрах data (форма) или json (JSON-данные).",
+    "example": "import requests\npayload = {'key1': 'value1', 'key2': 'value2'}\nr = requests.post('https://httpbin.org/post', data=payload)"
+  },
+  {
+    "text": "Что такое JSON, и как работать с ним в Python?",
+    "options": [
+      "Двоичный формат данных",
+      "Текстовый формат обмена данными, работа через модуль json",
+      "Специальный тип данных Python",
+      "Протокол для работы с БД"
+    ],
+    "correct": 1,
+    "explanation": "JSON (JavaScript Object Notation) - текстовый формат обмена данными. В Python есть модуль json для кодирования/декодирования: json.dumps() и json.loads().",
+    "example": "import json\ndata = {'name': 'Alice', 'age': 30}\njson_str = json.dumps(data)\nparsed = json.loads(json_str)"
+  },
+  {
+    "text": "Как можно взаимодействовать с API с помощью библиотеки requests?",
+    "options": [
+      "Только для чтения данных",
+      "Отправка запросов, обработка ответов, работа с заголовками",
+      "Только через WebSockets",
+      "Только для простых GET-запросов"
+    ],
+    "correct": 1,
+    "explanation": "Requests позволяет: отправлять все типы HTTP-запросов, добавлять заголовки, параметры, обрабатывать ответы (JSON, текст, статус-код), работать с сессиями.",
+    "example": "import requests\nheaders = {'Authorization': 'Bearer token'}\nparams = {'page': 1}\nresponse = requests.get('https://api.example.com', headers=headers, params=params)\ndata = response.json()"
+  },
+  {
+    "text": "Как парсить HTML-страницы с помощью библиотеки BeautifulSoup?",
+    "options": [
+      "Через регулярные выражения",
+      "Созданием объекта BeautifulSoup и поиском элементов",
+      "Только через XPath",
+      "Автоматически при загрузке страницы"
+    ],
+    "correct": 1,
+    "explanation": "BeautifulSoup создает дерево объектов из HTML. Поиск элементов: find() (первый), find_all() (все), по тегу, классу, id и др. Работает с парсерами lxml, html.parser.",
+    "example": "from bs4 import BeautifulSoup\nimport requests\nhtml = requests.get('https://example.com').text\nsoup = BeautifulSoup(html, 'html.parser')\ntitles = soup.find_all('h2', class_='title')"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "text": "Как настроить сервер для работы с Django и Flask?",
+    "options": [
+      "Только через облачные платформы",
+      "Использовать WSGI-сервер (Gunicorn/uWSGI) + Nginx",
+      "Запускать напрямую через python manage.py runserver",
+      "Требуется специализированное железо"
+    ],
+    "correct": 1,
+    "explanation": "Для production-окружения Django/Flask приложения разворачивают через WSGI-сервер (Gunicorn/uWSGI) с веб-сервером (Nginx/Apache) в качестве reverse proxy. Это обеспечивает стабильность и безопасность.",
+    "example": "# Для Flask/Gunicorn/Nginx:\ngunicorn -w 4 -b 127.0.0.1:8000 app:app\n\n# В Nginx конфиге:\nlocation / {\n    proxy_pass http://127.0.0.1:8000;\n    proxy_set_header Host $host;\n}"
+  },
+  {
+    "text": "Как создать простое приложение для веб-парсинга с помощью библиотеки BeautifulSoup?",
+    "options": [
+      "Только через Selenium",
+      "Используя requests для загрузки страницы и BeautifulSoup для разбора HTML",
+      "Через встроенный модуль urllib",
+      "Требуется специализированный браузер"
+    ],
+    "correct": 1,
+    "explanation": "Базовый парсинг: 1) requests.get() для загрузки страницы, 2) BeautifulSoup() для создания объекта парсера, 3) Методы find()/find_all() для извлечения данных.",
+    "example": "import requests\nfrom bs4 import BeautifulSoup\n\nurl = 'https://example.com'\nresponse = requests.get(url)\nsoup = BeautifulSoup(response.text, 'html.parser')\ntitles = soup.find_all('h2', class_='title')"
+  },
+  {
+    "text": "Что такое регулярные выражения, и как их использовать для парсинга данных?",
+    "options": [
+      "Специальный язык запросов к БД",
+      "Шаблоны для поиска и обработки текста через модуль re",
+      "Только для валидации email",
+      "Альтернатива CSS-селекторам"
+    ],
+    "correct": 1,
+    "explanation": "Регулярные выражения (regex) - мощный инструмент для поиска и обработки текста по шаблонам. В Python доступны через модуль re (match, search, findall и др.).",
+    "example": "import re\ntext = 'Emails: user@example.com, admin@site.org'\nemails = re.findall(r'[\\w.-]+@[\\w.-]+', text)\n# ['user@example.com', 'admin@site.org']"
+  },
+  {
+    "text": "Как обрабатывать динамический контент на веб-страницах с помощью Selenium?",
+    "options": [
+      "Только через анализ исходного кода страницы",
+      "Использовать WebDriverWait для ожидания загрузки элементов",
+      "Динамический контент нельзя обработать",
+      "Через регулярные выражения"
+    ],
+    "correct": 1,
+    "explanation": "Selenium WebDriver может взаимодействовать с динамическим контентном: 1) Ожидание элементов (WebDriverWait), 2) Имитация действий пользователя (click, scroll), 3) Исполнение JavaScript.",
+    "example": "from selenium.webdriver.support.ui import WebDriverWait\nfrom selenium.webdriver.common.by import By\n\nwait = WebDriverWait(driver, 10)\nelement = wait.until(\n    EC.presence_of_element_located((By.ID, 'dynamic-content'))\n)"
+  },
+  {
+    "text": "Как сохранять результаты парсинга в CSV или базу данных?",
+    "options": [
+      "Только через ручное копирование",
+      "Использовать модули csv и sqlite3 (или ORM)",
+      "Автоматически при парсинге",
+      "Требуется специальный формат"
+    ],
+    "correct": 1,
+    "explanation": "Для сохранения данных: 1) CSV - модуль csv (writer, DictWriter), 2) БД - sqlite3 для SQLite или ORM (Django, SQLAlchemy) для других СУБД. Данные структурируют перед сохранением.",
+    "example": "# CSV\nimport csv\nwith open('data.csv', 'w') as f:\n    writer = csv.writer(f)\n    writer.writerow(['Name', 'Email'])\n    writer.writerows(data)\n\n# SQLite\nimport sqlite3\nconn = sqlite3.connect('data.db')\ncursor = conn.cursor()\ncursor.execute('INSERT INTO users VALUES (?, ?)', (name, email))"
+  }
+]

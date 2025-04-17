@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина - Начало</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать в викторину!</h1>
+        <form action="{{ url_for('start_quiz') }}" method="post">
+            <label for="username">Введите ваше имя:</label>
+            <input type="text" id="username" name="username" required>
+            <button type="submit">Начать викторину</button>
+        </form>
+    </div>
+</body>
+</html>

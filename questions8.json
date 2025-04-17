@@ -1,0 +1,122 @@
+[
+  {
+    "text": "Как клонировать репозиторий с GitHub в локальную папку?",
+    "options": [
+      "Через git clone с URL репозитория",
+      "Скачиванием ZIP-архива",
+      "Копированием файлов вручную",
+      "Через git fork"
+    ],
+    "correct": 0,
+    "explanation": "Команда git clone создает локальную копию удаленного репозитория со всей историей. URL можно найти на странице репозитория GitHub (кнопка 'Code').",
+    "example": "git clone https://github.com/user/repo.git\ncd repo"
+  },
+  {
+    "text": "Как создать новый коммит в Git и добавить изменения в репозиторий?",
+    "options": [
+      "git save -m 'message'",
+      "git add -> git commit -> git push",
+      "Только через интерфейс GitHub",
+      "git update --all"
+    ],
+    "correct": 1,
+    "explanation": "Стандартный workflow: 1) git add (подготовка изменений), 2) git commit (фиксация с сообщением), 3) git push (отправка на удаленный репозиторий).",
+    "example": "git add .\ngit commit -m 'Add new feature'\ngit push origin main"
+  },
+  {
+    "text": "Что такое ветки в Git, и как их создавать и сливать?",
+    "options": [
+      "Копии файлов проекта, создаются через copy/paste",
+      "Изолированные линии разработки, git branch / git merge",
+      "Только для удаленного репозитория",
+      "Автоматически создаваемые резервные копии"
+    ],
+    "correct": 1,
+    "explanation": "Ветки (branches) - изолированные линии разработки. Основные команды: git branch (список), git checkout -b (создать), git merge (слить).",
+    "example": "git branch new-feature  # Создать\ngit checkout new-feature  # Переключиться\ngit merge new-feature  # Слить с текущей"
+  },
+  {
+    "text": "Как разрешать конфликты при слиянии веток в Git?",
+    "options": [
+      "Автоматически через git auto-fix",
+      "Вручную редактируя конфликтующие файлы",
+      "Удаляя одну из веток",
+      "Игнорируя изменения"
+    ],
+    "correct": 1,
+    "explanation": "При конфликте Git помечает конфликтующие участки в файлах. Нужно вручную отредактировать файлы, оставив нужные изменения, затем сделать git add и git commit.",
+    "example": "<<<<<<< HEAD\nВаш код\n=======\nЧужой код\n>>>>>>> branch-name\n\n# После редактирования:\ngit add file.txt\ngit commit"
+  },
+  {
+    "text": "Что такое git merge и git rebase, и в чем их отличие?",
+    "options": [
+      "merge создает новый коммит слияния, rebase перезаписывает историю",
+      "rebase безопаснее для командной работы",
+      "Нет различий",
+      "merge только для локальных веток"
+    ],
+    "correct": 0,
+    "explanation": "merge сохраняет историю обеих веток, создавая коммит слияния. rebase перемещает коммиты одной ветки на конец другой, создавая линейную историю (может вызвать проблемы при совместной работе).",
+    "example": "# Merge\ngit merge feature\n\n# Rebase\ngit checkout feature\ngit rebase main"
+  },
+  {
+    "text": "Как отменить изменения в локальном репозитории с помощью git checkout?",
+    "options": [
+      "git checkout -- filename (отмена изменений в файле)",
+      "git checkout undo",
+      "Только через git reset",
+      "Автоматически при следующем коммите"
+    ],
+    "correct": 0,
+    "explanation": "git checkout -- filename отменяет изменения в указанном файле (возвращает к последней закоммиченной версии). Для отмены коммитов используется git reset.",
+    "example": "git checkout -- script.py  # Отмена изменений\ngit checkout HEAD~1  # Переключение на предыдущий коммит"
+  },
+  {
+    "text": "Что такое git pull и как его использовать для синхронизации с удалённым репозиторием?",
+    "options": [
+      "git pull = git fetch + git merge",
+      "Только для отправки изменений",
+      "Альтернатива git clone",
+      "Удаляет локальные изменения"
+    ],
+    "correct": 0,
+    "explanation": "git pull забирает изменения из удаленного репозитория (git fetch) и сливает их с текущей веткой (git merge). Позволяет синхронизировать локальную копию с удаленной.",
+    "example": "git pull origin main  # Получить изменения из main\n# Эквивалентно:\ngit fetch origin\ngit merge origin/main"
+  },
+  {
+    "text": "Что такое виртуальная машина, и как её создать с помощью VirtualBox?",
+    "options": [
+      "Эмулятор мобильного устройства",
+      "Изолированная среда для запуска ОС внутри основной системы",
+      "Только для тестирования сети",
+      "Облачный сервис Google"
+    ],
+    "correct": 1,
+    "explanation": "VirtualBox позволяет создавать виртуальные машины (ВМ) - изолированные среды с собственной ОС. Процесс: 1) Установить VirtualBox, 2) Создать новую ВМ, 3) Указать параметры, 4) Установить ОС с ISO-образа.",
+    "example": "1. Скачать VirtualBox\n2. 'Создать' -> Указать имя, тип ОС\n3. Выделить ресурсы (RAM, HDD)\n4. Запустить ВМ и установить ОС"
+  },
+  {
+    "text": "Как установить и настроить Linux для разработки Python-приложений?",
+    "options": [
+      "Только через облачные сервисы",
+      "Установить дистрибутив, Python, pip, настроить окружение",
+      "Linux не подходит для Python",
+      "Требуется специальное железо"
+    ],
+    "correct": 1,
+    "explanation": "Основные шаги: 1) Установить дистрибутив (Ubuntu), 2) Обновить пакеты (apt update), 3) Установить Python (apt install python3), 4) Установить pip (apt install python3-pip), 5) Настроить venv.",
+    "example": "sudo apt update\nsudo apt install python3 python3-pip\npython3 -m venv myenv\nsource myenv/bin/activate\npip install -r requirements.txt"
+  },
+  {
+    "text": "Как деплоить Python-приложение на сервер?",
+    "options": [
+      "Только через FTP загрузку файлов",
+      "Скопировать файлы вручную",
+      "Использовать WSGI-сервер (Gunicorn) + Nginx/Apache",
+      "Python-приложения нельзя деплоить"
+    ],
+    "correct": 2,
+    "explanation": "Стандартный способ: 1) Настроить сервер (Python, зависимости), 2) Использовать WSGI-сервер (Gunicorn, uWSGI), 3) Настроить веб-сервер (Nginx/Apache) как прокси, 4) Запустить через systemd/supervisor.",
+    "example": "# Установка Gunicorn\npip install gunicorn\n\n# Запуск\ngunicorn -w 4 myapp:app\n\n# Nginx конфиг:\nlocation / {\n    proxy_pass http://localhost:8000;\n}"
+  }
+]
