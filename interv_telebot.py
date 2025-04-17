@@ -4,6 +4,10 @@ from app import app, db, Question, GameHistory  # Импортируем мод�
 import random
 import html  # Для экранирования специальных символов
 from datetime import datetime, UTC  # Импортируем UTC для timezone-aware времени
+from dotenv import load_dotenv
+import os
+load_dotenv()  # Загружает переменные из .env
+token = os.getenv("TELEGRAM_BOT_TOKEN")
 
 # Хранение состояния игры для каждого пользователя
 user_states = {}
@@ -192,8 +196,7 @@ def main():
     """
     Основная функция для запуска бота.
     """
-    # Получите токен бота от @BotFather
-    token = "7650319084:AAF9rohuXnS2rKk_GxQruL-LoYJihN7RX4c"
+
 
     # Создаем приложение
     application = Application.builder().token(token).build()
